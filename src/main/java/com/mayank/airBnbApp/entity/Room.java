@@ -1,0 +1,58 @@
+package com.mayank.airBnbApp.entity;
+
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Entity
+@Getter
+@Setter
+public class Room {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_id",nullable = false)
+    private Hotel hotel;
+
+
+    @Column(nullable = false)
+    private String type;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal basePrice;
+    //precision means total digits before and after the decimal
+    //scale means no. of those digits after the decimal;
+    //precision= 5 , scale = 2 . ex.= 123.45
+
+
+    @Column(columnDefinition = "TEXT[]")
+    private String[] photos;
+
+    @Column(columnDefinition = "TEXT[]")
+    private String amenities;
+
+    @Column(nullable = false)
+    private Integer totalCount;
+
+    @Column(nullable = false)
+    private Integer capacity;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
+
+
+
+}
