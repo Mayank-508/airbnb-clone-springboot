@@ -24,7 +24,8 @@ public class Hotel {
 
     private String city;
 
-    @Column(columnDefinition = "TEXT[]")
+    @Column(columnDefinition = "TEXT[]") // JPA doesnt know about this dataType hence necessary
+                                         // to specify that it is of type text array
     private String[] photos;
 
     @Column(columnDefinition = "TEXT[]")
@@ -37,7 +38,8 @@ public class Hotel {
     private LocalDateTime updatedAt;
 
     @Embedded
-    private HotelContactInfo contactInfo;
+    private HotelContactInfo contactInfo; // Embedded means all fields of the HotelContactInfo will be present in the
+                                          // Hotel table but in the code it will be present in a different class.
 
 
     @Column(nullable = false)
