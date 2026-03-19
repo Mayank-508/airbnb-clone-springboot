@@ -41,15 +41,16 @@ public class Hotel {
     private HotelContactInfo contactInfo; // Embedded means all fields of the HotelContactInfo will be present in the
                                           // Hotel table but in the code it will be present in a different class.
 
+    @ManyToOne
+    private User owner;
 
     @Column(nullable = false)
     private Boolean active;
 
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY)
+    private List<Room> rooms;
 
-
-
-
-
-
+    @OneToMany(mappedBy = "hotel", fetch=FetchType.LAZY)
+    private  List<Inventory> inventories;
 
 }
