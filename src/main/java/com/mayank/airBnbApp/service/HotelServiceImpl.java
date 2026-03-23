@@ -2,6 +2,8 @@ package com.mayank.airBnbApp.service;
 
 
 import com.mayank.airBnbApp.dto.HotelDto;
+import com.mayank.airBnbApp.dto.HotelInfoDto;
+import com.mayank.airBnbApp.dto.RoomDto;
 import com.mayank.airBnbApp.entity.Hotel;
 import com.mayank.airBnbApp.entity.Inventory;
 import com.mayank.airBnbApp.entity.Room;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -105,5 +108,21 @@ public class HotelServiceImpl implements HotelService {
         }
 
     }
+
+    @Override
+    public HotelInfoDto getHotelInfoById(Long hotelId) {
+        Hotel hotel=hotelRepository.findById(hotelId)
+                .orElseThrow(()-> new ResourceNotFoundException("Hotel not found with id" + hotelId));
+
+        List<RoomDto> rooms= hotel.getRooms().stream()
+                .map(  room -> modelMapper.map(room, RoomDto.class))
+                .toList();
+
+
+
+        return  new HotelInfoDto(modelMapper.map(hotel, HotelDto.class), rooms);
+
+    }
+
 
 }

@@ -22,7 +22,7 @@ public class Guest {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false )
     private Gender gender;
 
     private Integer age;

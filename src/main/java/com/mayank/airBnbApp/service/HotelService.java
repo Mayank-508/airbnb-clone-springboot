@@ -1,6 +1,7 @@
 package com.mayank.airBnbApp.service;
 
 import com.mayank.airBnbApp.dto.HotelDto;
+import com.mayank.airBnbApp.dto.HotelInfoDto;
 import com.mayank.airBnbApp.entity.Hotel;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +17,6 @@ public interface HotelService {
    void deleteHotelById(Long id);
 
    void activateHotel(Long id);
+
+   HotelInfoDto getHotelInfoById(Long hotelId);
 }

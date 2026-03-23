@@ -53,15 +53,11 @@ public class HotelController {
     // in patch mapping, it is to update one or sometimes few but not all fields hence,
     // for changing just manually doing it is feasible, while
     // for more than one field update we do use Reflections.
-    @PatchMapping("/{hotelId}")
+    @PatchMapping("/{hotelId}/activate")
     public ResponseEntity<Void> activateHotel(@PathVariable  Long hotelId)
     {
         hotelService.activateHotel(hotelId);
         return ResponseEntity.noContent().build();
     }
-
-
-
-
 
 }
