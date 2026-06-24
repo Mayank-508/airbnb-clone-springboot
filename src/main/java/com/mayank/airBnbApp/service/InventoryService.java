@@ -2,6 +2,7 @@ package com.mayank.airBnbApp.service;
 
 
 import com.mayank.airBnbApp.dto.HotelDto;
+import com.mayank.airBnbApp.dto.HotelPriceDto;
 import com.mayank.airBnbApp.dto.HotelSearchRequestDto;
 import com.mayank.airBnbApp.entity.Inventory;
 import com.mayank.airBnbApp.entity.Room;
@@ -19,5 +20,5 @@ public interface InventoryService {
     void deleteAllInventories( Room room);
 
 
-    Page<HotelDto> searchHotels(HotelSearchRequestDto hotelSearchRequestDto);
+    Page<HotelPriceDto> searchHotels(HotelSearchRequestDto hotelSearchRequestDto);
 }

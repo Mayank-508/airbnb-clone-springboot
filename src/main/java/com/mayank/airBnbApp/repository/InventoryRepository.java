@@ -21,25 +21,6 @@ public interface InventoryRepository extends JpaRepository<Inventory, Long> {
 
     // Hotel is denormalized(made redundant) in Inventory to avoid joins,
 // enabling direct hotel search without extra queries.
-    @Query(""" 
-    SELECT DISTINCT i.hotel from Inventory i 
-     where i.city= :cityName 
-     AND i.date BETWEEN :startDate AND :endDate
-     AND i.closed = false
-     AND (i.totalCount - i.bookedCount - i.reservedCount) >= :roomsCount
-     GROUP BY i.hotel, i.room HAVING COUNT(i.date)= :dateCount
-"""
-    )
-    Page<Hotel> findHotelsWithAvailableInventory(
-            // @Param("cityName") means the method parameter 'city' will be passed to the query as the named parameter :cityName
-
-            @Param("cityName") String city,
-            @Param("startDate") LocalDate startDate,
-            @Param("endDate") LocalDate endDate,
-            @Param("roomsCount") Integer roomsCount,
-            @Param("dateCount") long dateCount,
-            Pageable pageable
-    );
 
 
     @Query("""
@@ -61,4 +42,5 @@ public interface InventoryRepository extends JpaRepository<Inventory, Long> {
 
 
 
+    List<Inventory> findByHotelAndDateBetween(Hotel hotel, LocalDate startDate, LocalDate endDate);
 }
