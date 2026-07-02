@@ -1,0 +1,29 @@
+package com.mayank.airBnbApp.service;
+
+import com.mayank.airBnbApp.entity.User;
+import com.mayank.airBnbApp.exceptions.ResourceNotFoundException;
+import com.mayank.airBnbApp.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService, UserDetailsService {
+
+    private final UserRepository userRepository;
+
+
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User does not exist with id -" + id));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+       return userRepository.findByEmail(username).orElse(null);
+    }
+}

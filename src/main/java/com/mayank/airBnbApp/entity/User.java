@@ -4,8 +4,7 @@ package com.mayank.airBnbApp.entity;
 import com.mayank.airBnbApp.entity.enums.Role;
 import jakarta.persistence.*;
 import jakarta.transaction.UserTransaction;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,12 +12,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Getter
-@Setter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "app_user")
 public class User implements UserDetails {
     @Id
@@ -48,6 +50,18 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return Objects.equals(getId(), user.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
     }
 }
 

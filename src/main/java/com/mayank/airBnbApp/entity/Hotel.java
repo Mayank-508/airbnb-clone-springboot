@@ -42,7 +42,7 @@ public class Hotel {
     private HotelContactInfo contactInfo; // Embedded means all fields of the HotelContactInfo will be present in the
                                           // Hotel table but in the code it will be present in a different class.
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User owner;
 
     @Column(nullable = false)
