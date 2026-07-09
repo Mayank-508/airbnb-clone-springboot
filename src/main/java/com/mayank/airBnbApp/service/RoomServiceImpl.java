@@ -22,6 +22,8 @@ import org.springframework.web.client.ResourceAccessException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.mayank.airBnbApp.util.AppUtils.getCurrentUser;
+
 
 @RequiredArgsConstructor
 @Service
@@ -119,5 +121,34 @@ public class RoomServiceImpl implements RoomService{
 
 
 
+    }
+
+    @Override
+    public RoomDto updateRoomById(Long hotelId, Long roomId, RoomDto roomDto) {
+
+        log.info("Updating the room with id {}", roomId);
+        Hotel hotel= hotelRepository.findById(hotelId)
+                .orElseThrow(()-> new ResourceAccessException("No Hotel with id :" + hotelId));
+
+        User user = getCurrentUser();
+        if(!user.equals(hotel.getOwner())) {
+            throw new UnAuthorisedException("This user does not own this hotel with id: "+hotelId);
+        }
+
+        Room room= roomRepository.findById(roomId).orElseThrow(()-> new ResourceAccessException("Room does not exist with id "+roomId));
+
+        log.info("***hotel- > {}", room.getHotel());
+
+        // Note that if user wants to also update the price then
+        // addtionaly we need to call inventoryRepository to update and
+        // set the price to the new price/- we can write a JPQL for that
+
+        modelMapper.map(roomDto, room);
+
+        room.setId(roomId);
+        room.setHotel(hotel);
+        room=roomRepository.save(room);
+
+        return modelMapper.map(room ,RoomDto.class);
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -30,11 +31,31 @@ public class HotelBookingController {
     }
 
 
-
     @PostMapping("/{bookingId}/addGuests")
     public ResponseEntity<BookingDto> addGuests(@PathVariable Long bookingId, @RequestBody List<GuestDto> guestDtoList)
     {
         return ResponseEntity.ok(bookingService.addGuest(bookingId, guestDtoList));
     }
+
+    @PostMapping("/{bookingId}/payments")
+    public ResponseEntity<Map<String,String>> initiatePayments(@PathVariable Long bookingId)
+    {
+        String sessionUrl= bookingService.initiatePayments(bookingId);
+        return ResponseEntity.ok(Map.of("sessionUrl",sessionUrl));
+
+    }
+
+    @PostMapping("/{bookingId}/cancel")
+    public ResponseEntity<Void> cancelBooking(@PathVariable Long bookingId) {
+        bookingService.cancelBooking(bookingId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{bookingId}/status")
+    public ResponseEntity<Map<String, String>> getBookingStatus(@PathVariable Long bookingId) {
+        return ResponseEntity.ok(Map.of("status", bookingService.getBookingStatus(bookingId)));
+    }
+
+
 
 }

@@ -1,9 +1,7 @@
 package com.mayank.airBnbApp.service;
 
 
-import com.mayank.airBnbApp.dto.HotelDto;
-import com.mayank.airBnbApp.dto.HotelPriceDto;
-import com.mayank.airBnbApp.dto.HotelSearchRequestDto;
+import com.mayank.airBnbApp.dto.*;
 import com.mayank.airBnbApp.entity.Inventory;
 import com.mayank.airBnbApp.entity.Room;
 import org.springframework.data.domain.Page;
@@ -21,4 +19,8 @@ public interface InventoryService {
 
 
     Page<HotelPriceDto> searchHotels(HotelSearchRequestDto hotelSearchRequestDto);
+
+    List<InventoryDto> getAllInventoryByRoom(Long roomId);
+
+    void updateInventory(Long roomId, UpdateInventoryRequestDto updateInventoryRequestDto);
 }

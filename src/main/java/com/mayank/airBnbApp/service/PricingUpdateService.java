@@ -38,7 +38,7 @@ public class PricingUpdateService {
     private final HotelMinPriceRepository hotelMinPriceRepository;
     private final PricingService pricingService;
 
-    @Scheduled(cron = "0 * * * * *")  // (sec min hr .....)
+    @Scheduled(cron = "0 0 * * * *")  // (sec min hr .....)
     public void updatePrices(){
 
         int page=0;

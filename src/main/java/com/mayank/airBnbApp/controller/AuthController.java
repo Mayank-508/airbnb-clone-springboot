@@ -46,12 +46,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-
-
-
-
     public ResponseEntity<LoginResponseDto> refresh(HttpServletRequest request) {
-
 
 // Constant-first equals(): safer than cookie.getName().equals("refreshToken") because getName() may be null.
         // in order to avoid the Null Pointer Exception

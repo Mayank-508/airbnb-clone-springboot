@@ -5,6 +5,7 @@ import com.mayank.airBnbApp.dto.RoomDto;
 import com.mayank.airBnbApp.repository.RoomRepository;
 import com.mayank.airBnbApp.service.RoomService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.groovy.GroovyBeanDefinitionReader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,5 +51,10 @@ public class RoomController {
          roomService.deleteRoomById(roomId);
 
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{roomId}")
+    ResponseEntity<RoomDto> updateRoomById(@PathVariable Long hotelId, @PathVariable Long roomId, @RequestBody RoomDto roomDto
+                                           ){
+        return ResponseEntity.ok(roomService.updateRoomById(hotelId, roomId,roomDto));
     }
 }

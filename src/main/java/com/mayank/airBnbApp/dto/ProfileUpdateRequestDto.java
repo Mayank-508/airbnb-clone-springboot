@@ -1,14 +1,12 @@
 package com.mayank.airBnbApp.dto;
-
+import com.mayank.airBnbApp.entity.enums.Gender;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
-public class UserDto {
-    private Long id;
-    private String email;
+public class ProfileUpdateRequestDto {
     private String name;
-    private String gender;
     private LocalDate dateOfBirth;
+    private Gender gender;
 }

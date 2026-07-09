@@ -41,7 +41,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             }
 
             String token = requestTokenHeader.split("Bearer ")[1];
-            Long userId = jwtService.getUserIdFromToken(token);
+            Long userId = jwtService.getUserIdFromToken(token); // if token not valid , exception raised
 
             if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 User user = userService.getUserById(userId);
@@ -51,7 +51,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
                 authenticationToken.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken); // Security context getting populated
             }
             filterChain.doFilter(request, response);
         } catch (JwtException ex) {
