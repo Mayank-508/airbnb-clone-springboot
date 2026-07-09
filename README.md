@@ -240,16 +240,12 @@ Implemented a global `@ControllerAdvice` (`GlobalExceptionHandler`) to intercept
 - Integrated **3rd-Party APIs (Stripe)** and successfully debugged complex Webhook synchronizations.
 - Solidified backend architecture skills by strictly adhering to the **DTO and Builder patterns**.
 
-## 📸 Screenshots / API Examples
 
-*(Add screenshots of your Postman requests, Swagger UI, or database schemas here)*
 
-## 📄 License
 
-This project is licensed under the MIT License.
 
 ## 👨‍💻 Author
 
-**[Your Name]**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
+**[Mayank Mishra]**
+- GitHub: github.com/Mayank-508
+- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/mayankmishra24)
